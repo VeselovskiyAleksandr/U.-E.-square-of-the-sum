@@ -3,11 +3,14 @@
 
 #include <iostream>
 #include "Helpers.h"
+#include <string>
 
 int main()
 {
 	float result = square(5.64, 3.42);
    std:: cout << result;
+  std:: string str = "skillbox";
+   std::cout<<"\n" << str << " " << str.length()<<" "<<str[0]<<" "<<str[str.length()-1];
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
