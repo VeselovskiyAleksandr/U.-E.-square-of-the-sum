@@ -4,13 +4,41 @@
 #include <iostream>
 #include "Helpers.h"
 #include <string>
+#include <locale.h>
 
 int main()
 {
+  setlocale(LC_ALL, "rus");
+	std::cout << "\n Задание к уроку 13.\n";
+
 	float result = square(5.64, 3.42);
    std:: cout << result;
+
+   std::cout << "\n Задание к уроку 14.";
+
   std:: string str = "skillbox";
    std::cout<<"\n" << str << " " << str.length()<<" "<<str[0]<<" "<<str[str.length()-1];
+  
+   std::cout << "\n Задание к уроку 15.";
+
+  bool b=true;
+   int n=0;
+	  std::cout << "\n" << "Для вывода чётных чисел введите 0, для вывода нечётных - любое другое число\n";
+	  std::cin >> n;
+	  //Обеспечение правильности ввода переменной типа bool.
+	  if (n == 0)
+	  {
+		  b = false;
+	  }
+	  else
+	  {
+		  b == true;
+	  }
+   std::cout << "\n" << "Укажите наибольшее число ряда\n"; 
+ std:: cin >> n;
+   SortByParity(n, b);
+
+   return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
