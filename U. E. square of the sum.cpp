@@ -5,24 +5,32 @@
 #include "Helpers.h"
 #include <string>
 #include <locale.h>
+#include <time.h>
+//#include "ExampleGameModeBase.h"
 
 int main()
 {
   setlocale(LC_ALL, "rus");
 	std::cout << "\n Задание к уроку 13.\n";
 
-	float result = square(5.64, 3.42);
-   std:: cout << result;
+	float x = 0, y = 0;
+   std::cout << "\nВведите первый множитель: ";
+  std:: cin >> x;
+  std::cout << "\nВведите второй множитель: ";
+  std::cin >> y;
+	 std:: cout << square(x, y);
 
    std::cout << "\n Задание к уроку 14.";
 
   std:: string str = "skillbox";
+  std::cout << "\nВведите строку: ";
+  std::cin >> str;
    std::cout<<"\n" << str << " " << str.length()<<" "<<str[0]<<" "<<str[str.length()-1];
   
    std::cout << "\n Задание к уроку 15.";
 
   bool b=true;
-   int n=0;
+  int n=0;
 	  std::cout << "\n" << "Для вывода чётных чисел введите 0, для вывода нечётных - любое другое число\n";
 	  std::cin >> n;
 	  //Обеспечение правильности ввода переменной типа bool.
@@ -32,12 +40,54 @@ int main()
 	  }
 	  else
 	  {
-		  b == true;
+		  b = true;
 	  }
    std::cout << "\n" << "Укажите наибольшее число ряда\n"; 
  std:: cin >> n;
    SortByParity(n, b);
 
+   std::cout << "\n Задание к уроку 16.";
+   std::cout << "\n" << "Укажите размерность массива\n";
+   std::cin >> n;
+   for (int i = 0; i < n; ++i)
+   {
+	   for (int j = 0; j < n; ++j)
+	   {
+		   std::cout << i + j << " ";
+	   }
+	   std::cout << "\n";
+   }
+ //  struct tm buf;
+   //time_t t = time(NULL);
+  // struct tm* local = localtime(&t);
+ //  localtime_s(&buf, &t);
+ //  asctime_s(t);
+  // std::cout << "\n"<< asctime(local);
+   tm Tm;
+   const int SIZE = 5;
+   char st[SIZE] = { 0 };
+   time_t t = std::time(nullptr);
+   errno_t err = localtime_s(&Tm, &t);
+   if (err) {
+	   std::cout << "Error" << std::endl;
+	   return 1;
+   }
+  // size_t count = std::strftime(st, SIZE,
+	//   "Сегодня:\n%A %d %b %Y %H:%M:%S\n%d.%m.%Y", &Tm);
+   size_t count = std::strftime(st, SIZE,"\n%d", &Tm);
+   if (!count) {
+	   std::cout << "Error" << std::endl;
+	   return 1;
+   }
+  int m =((int)st[1]-48)*10+((int)st[2]-48);
+ int p = m % n;
+ std::cout << "\nComp: " << n << " " << m << " " << p;
+ int sum = 0;
+ for (int i = 0; i < n; i++) {
+	 sum += (i + p);
+	 std::cout << "\n"<<"p: " << p;
+ }
+   std::cout << "\n"<<sum;
    return 0;
 }
 
