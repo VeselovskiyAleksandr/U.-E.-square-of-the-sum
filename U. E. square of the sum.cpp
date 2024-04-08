@@ -7,6 +7,8 @@
 #include <locale.h>
 #include <time.h>
 //#include "ExampleGameModeBase.h"
+#include <stdio.h>
+#include <stdlib.h> 
 
 int main()
 {
@@ -46,6 +48,8 @@ int main()
  std:: cin >> n;
    SortByParity(n, b);
 
+
+
    std::cout << "\n Задание к уроку 16.";
    std::cout << "\n" << "Укажите размерность массива\n";
    std::cin >> n;
@@ -57,36 +61,40 @@ int main()
 	   }
 	   std::cout << "\n";
    }
- //  struct tm buf;
-   //time_t t = time(NULL);
-  // struct tm* local = localtime(&t);
- //  localtime_s(&buf, &t);
- //  asctime_s(t);
-  // std::cout << "\n"<< asctime(local);
-   tm Tm;
+   tm buf;
    const int SIZE = 5;
    char st[SIZE] = { 0 };
-   time_t t = std::time(nullptr);
-   errno_t err = localtime_s(&Tm, &t);
+   time_t t = time(nullptr);
+   errno_t err = localtime_s(&buf, &t);
    if (err) {
 	   std::cout << "Error" << std::endl;
 	   return 1;
    }
   // size_t count = std::strftime(st, SIZE,
 	//   "Сегодня:\n%A %d %b %Y %H:%M:%S\n%d.%m.%Y", &Tm);
-   size_t count = std::strftime(st, SIZE,"\n%d", &Tm);
-   if (!count) {
+   size_t count = std::strftime(st, SIZE,"\n%d", &buf);
+   if (!count)
+   {
 	   std::cout << "Error" << std::endl;
 	   return 1;
    }
-  int m =((int)st[1]-48)*10+((int)st[2]-48);
- int p = m % n;
- std::cout << "\nComp: " << n << " " << m << " " << p;
+  int date =((int)st[1]-48)*10+((int)st[2]-48);
+ int remainderDateByNumber = date % n;
+ //std::cout << "\nrem " << remainderDateByNumber<<" data "<<date<<" rasm "<<n;
  int sum = 0;
  for (int i = 0; i < n; i++) {
-	 sum += (i + p);
-	 std::cout << "\n"<<"p: " << p;
+	 for (int j = 0; j < n; j++)
+	 {
+		 if (i == remainderDateByNumber)
+		 {
+         sum += (i+j);
+	//	 std::cout << "\n" << sum << "\n";
+		 }
+	 }
+	// sum += (i + remainderDateByNumber);
+	 
  }
+ //sum += remainderDateByNumber;
    std::cout << "\n"<<sum;
    return 0;
 }
